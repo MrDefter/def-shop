@@ -21,6 +21,7 @@ class AuthentificationService:
             username: Имя пользователя.
             email: Майл пользователя.
             password: Пароль пользователя.
+            duplicate_password: Повторный пароль пользователя.
         """
 
         if password != duplicate_password:
@@ -28,7 +29,7 @@ class AuthentificationService:
                 message='Пароли не совпадают!'
             )
 
-        print(username, email, password)
+
         return RegistrationModelResponse(
             message='Пользователь успешно зарегистрирован!'
         )
