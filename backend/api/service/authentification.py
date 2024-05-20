@@ -1,6 +1,7 @@
 """Сервис аутентификации пользователей."""
 
 from backend.api.models import RegistrationModelResponse
+from backend.storage import insert_data
 
 
 class AuthentificationService:
@@ -29,6 +30,11 @@ class AuthentificationService:
                 message='Пароли не совпадают!'
             )
 
+        data = {'nameUser': None, 'mailUser': None, 'passwordUser': None}
+        insert_data(
+            table='shopUsers',
+            data=data,
+        )
 
         return RegistrationModelResponse(
             message='Пользователь успешно зарегистрирован!'
