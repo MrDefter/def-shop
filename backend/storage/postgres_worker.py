@@ -1,8 +1,8 @@
-"""Утилиты для работы с базой данных."""
+"""Работы с postgres"""
 
 from sqlalchemy import MetaData, Table
 
-from backend.storage.utils.connect import get_engine, make_cursor
+from backend.storage.utils.postgres_connect import get_engine, make_cursor
 
 
 def insert_data(table: str, data: dict) -> None:
@@ -23,7 +23,3 @@ def insert_data(table: str, data: dict) -> None:
             cursor.execute(insert, data)
         except Exception as exc:
             print(f'ОШИБКА: {exc}')
-
-
-
-
