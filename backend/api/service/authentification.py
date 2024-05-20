@@ -30,11 +30,8 @@ class AuthentificationService:
                 message='Пароли не совпадают!'
             )
 
-        data = {'nameUser': None, 'mailUser': None, 'passwordUser': None}
-        insert_data(
-            table='shopUsers',
-            data=data,
-        )
+        data = {'nameUser': username, 'mailUser': email, 'passwordUser': password}
+        insert_data(table='shopUsers', data=data)
 
         return RegistrationModelResponse(
             message='Пользователь успешно зарегистрирован!'

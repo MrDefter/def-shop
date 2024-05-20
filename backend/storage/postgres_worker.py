@@ -15,10 +15,10 @@ def insert_data(table: str, data: dict) -> None:
     metadata = MetaData()
     metadata.create_all(get_engine())
 
-    table = Table(table, metadata, autoload=True)
+    table = Table(table, metadata)
     insert = table.insert()
 
-    with make_cursor as cursor:
+    with make_cursor() as cursor:
         try:
             cursor.execute(insert, data)
         except Exception as exc:
