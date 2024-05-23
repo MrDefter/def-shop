@@ -1,6 +1,6 @@
 """Работы с postgres"""
 
-from sqlalchemy import MetaData, Table
+from sqlalchemy import MetaData, Table, insert
 
 from backend.storage.utils.postgres_connect import get_engine, make_cursor
 
@@ -16,11 +16,11 @@ def insert_data(table: str, data: dict) -> None:
     metadata.create_all(get_engine())
 
     table = Table(table, metadata, autoload_with=get_engine())
-    insert = table.insert()
+    stmt = insert(table).values(data)
 
-    print(insert)
+    print(stmt)
     with make_cursor() as cursor:
-        try:
-            cursor.execute(insert, data)
-        except Exception as exc:
-            print(f'ОШИБКА: {exc}')
+        # try:
+        cursor.execute(stmt)
+        # except Exception as exc:
+        #     print(f'ОШИБКА: {exc}')
