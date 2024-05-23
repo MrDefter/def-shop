@@ -3,7 +3,6 @@
 from fastapi import APIRouter, Request, Depends
 
 from backend.api.service import PagesService
-from backend.settings import get_templates_path_settings
 from fastapi.responses import HTMLResponse
 
 
@@ -26,7 +25,7 @@ def get_page_general(
         Сгенерированный шаблон HTML.
     """
     return service.get(
-        template=get_templates_path_settings().TEMPLATE_GENERAL_PATH,
-        directory=get_templates_path_settings().DIRECTORY_PATH,
+        template='general.html',
+        directory='backend/templates',
         request=request,
     )
