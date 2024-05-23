@@ -19,24 +19,25 @@ def insert_data(data: dict) -> None:
     with make_cursor() as cursor:
         try:
             cursor.execute(query, data)
-        except IntegrityError:
+        except IntegrityError as exc:
+            print(exc)
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
                 detail='Такой пользователь уже существует!',
             )
 
 
-def search_user(data: dict) -> None:
-    """Найти пользователя."""
+def search_user(data: dict) -> bool:
+    """Найти пользователя.
+
+    Returns:
+        True, если пользователь найден. Иначе False.
+    """
     query = select(ShopUsersScheme).where(
-        ShopUsersScheme.mailUser == data['mailUser'],
-        ShopUsersScheme.passwordUser == data['passwordUser'],
+        ShopUsersScheme.username == data['username'],
+        ShopUsersScheme.password == data['password'],
     )
 
     with make_cursor() as cursor:
         user = cursor.execute(query).all()
-        if not len(user):
-            raise HTTPException(
-                status.HTTP_400_BAD_REQUEST,
-                detail='Пользователь не найден! Проверьте правильность указанных данных.'
-            )
+        return not len(user)

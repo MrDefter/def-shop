@@ -7,5 +7,9 @@ from .authentification import (
     AuthorizationModelResponse,
 )
 
-__all__ = ['RegistrationModelRequest', 'RegistrationModelResponse']
-
+__all__ = [
+    'RegistrationModelRequest',
+    'RegistrationModelResponse',
+    'AuthorizationModelRequest',
+    'AuthorizationModelResponse',
+]

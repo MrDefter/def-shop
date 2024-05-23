@@ -1,6 +1,7 @@
 """Регистрация и авторизация"""
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
+from fastapi.security import OAuth2PasswordRequestForm
 
 from backend.api.models import (
     RegistrationModelRequest,
@@ -33,11 +34,13 @@ def post_general_registration(
 
 @router_authentification.post('/authorization')
 def post_general_authorization(
-    authorization_data: AuthorizationModelRequest,
+    response: Response,
+    authorization_data: OAuth2PasswordRequestForm = Depends(),
     service: AuthentificationService = Depends(),
 ):
     """Провести авторизацию пользователя."""
     return service.authorization_user(
-        email=authorization_data.email,
+        response=response,
+        username=authorization_data.username,
         password=authorization_data.password,
     )

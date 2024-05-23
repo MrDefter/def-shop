@@ -21,10 +21,10 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     create_table(
         'shopUsers',
-        Column('idUser', Integer, primary_key=True),
-        Column('nameUser', String(50), unique=True, nullable=False),
-        Column('mailUser', String(50), unique=True, nullable=False),
-        Column('passwordUser', String(50), unique=False, nullable=False),
+        Column('id', Integer, primary_key=True),
+        Column('username', String(50), unique=True, nullable=False),
+        Column('email', String(50), unique=True, nullable=False),
+        Column('password', String(50), unique=False, nullable=False),
     )
 
 

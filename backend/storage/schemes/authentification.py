@@ -11,7 +11,7 @@ class ShopUsersScheme(Base):
     """Схема таблицы для регистрации пользователей."""
     __tablename__ = 'shopUsers'
 
-    idUser = Column(Integer, primary_key=True)
-    nameUser = Column(String(50), unique=True, nullable=False)
-    mailUser = Column(String(50), unique=True, nullable=False)
-    passwordUser = Column(String(50), unique=False, nullable=False)
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), unique=True, nullable=False)
+    email = Column(String(50), unique=True, nullable=False)
+    password = Column(String(50), unique=False, nullable=False)

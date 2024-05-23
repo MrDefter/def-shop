@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, Depends
 
 from backend.api.service import PagesService
 from fastapi.responses import HTMLResponse
-
+from backend.api.models import AuthorizationModelRequest
 
 router_pages = APIRouter(
     tags=['Генерация шаблонов HTML страниц.'],
@@ -29,3 +29,12 @@ def get_page_general(
         directory='backend/templates',
         request=request,
     )
+
+
+@router_pages.get('/protected_route')
+def protected_route(
+    request: Request,
+    service: PagesService = Depends(),
+):
+    service.get_current_user(request=request)
+    return '123'

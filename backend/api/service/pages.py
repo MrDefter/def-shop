@@ -21,3 +21,7 @@ class PagesService:
         template = templates.TemplateResponse(template, {'request': request})
         return template
 
+    def get_current_user(self, request: Request):
+        """Тест"""
+        token = request.cookies.get('access_token')
+        print(token)
