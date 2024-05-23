@@ -36,6 +36,7 @@ def post_general_authorization(
     authorization_data: AuthorizationModelRequest,
     service: AuthentificationService = Depends(),
 ):
+    """Провести авторизацию пользователя."""
     return service.authorization_user(
         email=authorization_data.email,
         password=authorization_data.password,

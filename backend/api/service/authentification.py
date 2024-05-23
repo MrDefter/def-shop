@@ -3,7 +3,7 @@
 from fastapi import HTTPException, status
 
 from backend.api.models import RegistrationModelResponse, AuthorizationModelResponse
-from backend.storage import insert_data
+from backend.storage import insert_data, search_user
 
 
 class AuthentificationService:
@@ -32,9 +32,7 @@ class AuthentificationService:
                 detail='Пароли не совпадают!',
             )
 
-        data = {'nameUser': username, 'mailUser': email, 'passwordUser': password}
-        insert_data(table='shopUsers', data=data)
-
+        insert_data(data={'nameUser': username, 'mailUser': email, 'passwordUser': password})
         return RegistrationModelResponse(
             message='Пользователь успешно зарегистрирован!'
         )
@@ -45,6 +43,9 @@ class AuthentificationService:
         password: str,
     ) -> AuthorizationModelResponse:
         """Авторизация пользователя."""
+        search_user(data={'mailUser': email, 'passwordUser': password})
         return AuthorizationModelResponse(
             message='test',
         )
+
+
