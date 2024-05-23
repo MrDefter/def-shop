@@ -1,5 +1,7 @@
 """Сервис аутентификации пользователей."""
 
+from fastapi import HTTPException, status
+
 from backend.api.models import RegistrationModelResponse
 from backend.storage import insert_data
 
@@ -26,8 +28,9 @@ class AuthentificationService:
         """
 
         if password != duplicate_password:
-            return RegistrationModelResponse(
-                message='Пароли не совпадают!'
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                detail='Пароли не совпадают!',
             )
 
         data = {'nameUser': username, 'mailUser': email, 'passwordUser': password}

@@ -1,12 +1,14 @@
 """Работы с postgres"""
 
+from fastapi import HTTPException, status
 from sqlalchemy import MetaData, Table
+from sqlalchemy.exc import IntegrityError
 
-from backend.storage.utils.postgres_connect import get_engine, make_cursor
+from backend.storage.utils.connect import get_engine, make_cursor
 
 
 def insert_data(table: str, data: dict) -> None:
-    """Вставить данные в базу данных.
+    """Создать пользователя.
 
     Args:
         table: Название таблицы базы данных.
@@ -21,5 +23,8 @@ def insert_data(table: str, data: dict) -> None:
     with make_cursor() as cursor:
         try:
             cursor.execute(insert, data)
-        except Exception as exc:
-            print(f'ОШИБКА: {exc}')
+        except IntegrityError:
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                detail='Такой пользователь уже существует!',
+            )
