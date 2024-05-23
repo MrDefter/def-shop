@@ -45,7 +45,5 @@ class AuthentificationService:
         """Авторизация пользователя."""
         search_user(data={'mailUser': email, 'passwordUser': password})
         return AuthorizationModelResponse(
-            message='test',
+            message='Вход успешно выполнен!',
         )
-
-
