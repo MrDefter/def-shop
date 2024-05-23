@@ -8,7 +8,7 @@ Create Date: 2024-04-30 16:41:08.416351
 from typing import Sequence, Union
 
 from alembic.op import create_table, drop_table
-from sqlalchemy import Column, String
+from sqlalchemy import Column, Integer, String
 
 
 # revision identifiers, used by Alembic.
@@ -21,9 +21,10 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     create_table(
         'shopUsers',
-        Column('nameUser', String(50), nullable=False, unique=True),
-        Column('mailUser', String(50), nullable=False, unique=True),
-        Column('passwordUser', String(50), nullable=False, unique=False),
+        Column('idUser', Integer, primary_key=True),
+        Column('nameUser', String(50), unique=True, nullable=False),
+        Column('mailUser', String(50), unique=True, nullable=False),
+        Column('passwordUser', String(50), unique=False, nullable=False),
     )
 
 
