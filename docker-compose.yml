@@ -1,9 +1,9 @@
 services:
   postgres:
-    image: postgres:14.4
+    image: postgres:latest
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
+      POSTGRES_DB: schemes
     ports:
       - "5432:5432"
