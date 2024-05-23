@@ -79,6 +79,20 @@
 </div>
 <!-- Уведомление -->
 
+<!-- Уведомление -->
+<div id="notificationDuplicateUser" class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+    <div id="notificationContentDuplicateUser" class="toast hide bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+        <div class="toast-header">
+            <strong class="me-auto">Уведомление</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Такой пользователь уже существует!
+        </div>
+    </div>
+</div>
+<!-- Уведомление -->
+
 <!-- Отправка данных на сервер -->
 <script>
     document.getElementById("registrationForm").addEventListener("submit", function(event) {
@@ -105,19 +119,19 @@
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.message === "Пользователь успешно зарегистрирован!") {
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
                 notification.show();
             }
-            if (data.message === "Пароли не совпадают!") {
+            if (data.detail === "Пароли не совпадают!") {
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentFailedPassword'));
                 notification.show();
             }
+            if (data.detail === "Такой пользователь уже существует!") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentDuplicateUser'));
+                notification.show();
+            }
         })
-        .catch(error => {
-            console.error("Произошла ошибка:", error);
-        });
     });
 </script>
 <!-- Отправка данных на сервер -->
