@@ -56,6 +56,20 @@
 </div>
 <!-- Уведомление -->
 
+<!-- Уведомление -->
+<div id="notificationNotFoundUser" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1060">
+    <div id="notificationContentNotFoundUser" class="toast hide bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+        <div class="toast-header">
+            <strong class="me-auto">Уведомление</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Пользователь не найден! Проверьте правильность указанных данных.
+        </div>
+    </div>
+</div>
+<!-- Уведомление -->
+
 <!-- Отправка данных на сервер -->
 <script>
     document.getElementById("authorizationForm").addEventListener("submit", function(event) {
@@ -80,6 +94,10 @@
         .then(data => {
             if (data.message === "test") {
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
+                notification.show();
+            }
+            if (data.detail === "Пользователь не найден! Проверьте правильность указанных данных.") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentNotFoundUser'));
                 notification.show();
             }
         })
