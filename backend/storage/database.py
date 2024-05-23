@@ -1,30 +1,40 @@
 """Работы с postgres"""
 
 from fastapi import HTTPException, status
-from sqlalchemy import MetaData, Table
+from sqlalchemy import insert, select
 from sqlalchemy.exc import IntegrityError
 
-from backend.storage.utils.connect import get_engine, make_cursor
+from backend.storage.utils.connect import make_cursor
+from backend.storage.schemes import ShopUsersScheme
 
 
-def insert_data(table: str, data: dict) -> None:
+def insert_data(data: dict) -> None:
     """Создать пользователя.
 
     Args:
-        table: Название таблицы базы данных.
         data: Данные для вставки в базу данных.
     """
-    metadata = MetaData()
-    metadata.create_all(get_engine())
-
-    table = Table(table, metadata, autoload_with=get_engine())
-    insert = table.insert()
+    query = insert(ShopUsersScheme)
 
     with make_cursor() as cursor:
         try:
-            cursor.execute(insert, data)
+            cursor.execute(query, data)
         except IntegrityError:
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
                 detail='Такой пользователь уже существует!',
+            )
+
+
+def search_user(data: dict) -> None:
+    """Найти пользователя."""
+    query = select(ShopUsersScheme).where(ShopUsersScheme.mailUser == data['mailUser'])
+
+    with make_cursor() as cursor:
+        user = cursor.execute(query).all()
+
+        if not len(user):
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                detail='Пользователь не найден! Проверьте правильность указанных данных.'
             )
