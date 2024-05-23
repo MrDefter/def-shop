@@ -23,7 +23,7 @@ def upgrade() -> None:
         'shopUsers',
         Column('nameUser', String(50), nullable=False, unique=True),
         Column('mailUser', String(50), nullable=False, unique=True),
-        Column('passwordUser', String(50), nullable=False),
+        Column('passwordUser', String(50), nullable=False, unique=False),
     )
 
 
