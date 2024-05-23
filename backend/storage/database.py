@@ -28,11 +28,13 @@ def insert_data(data: dict) -> None:
 
 def search_user(data: dict) -> None:
     """Найти пользователя."""
-    query = select(ShopUsersScheme).where(ShopUsersScheme.mailUser == data['mailUser'])
+    query = select(ShopUsersScheme).where(
+        ShopUsersScheme.mailUser == data['mailUser'],
+        ShopUsersScheme.passwordUser == data['passwordUser'],
+    )
 
     with make_cursor() as cursor:
         user = cursor.execute(query).all()
-
         if not len(user):
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
