@@ -2,7 +2,7 @@
 
 from fastapi import HTTPException, status
 
-from backend.api.models import RegistrationModelResponse
+from backend.api.models import RegistrationModelResponse, AuthorizationModelResponse
 from backend.storage import insert_data
 
 
@@ -26,7 +26,6 @@ class AuthentificationService:
             password: Пароль пользователя.
             duplicate_password: Повторный пароль пользователя.
         """
-
         if password != duplicate_password:
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
@@ -40,6 +39,12 @@ class AuthentificationService:
             message='Пользователь успешно зарегистрирован!'
         )
 
-    def authorization_user(self):
+    def authorization_user(
+        self,
+        email: str,
+        password: str,
+    ) -> AuthorizationModelResponse:
         """Авторизация пользователя."""
-        pass
+        return AuthorizationModelResponse(
+            message='test',
+        )
