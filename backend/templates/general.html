@@ -18,12 +18,15 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Категории</button>
             </div>
             <div class="ml-auto">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Вход
-                </button>
+
+                <!-- Авторизация -->
+                {% include "modules/authorization.html" %}
+                <!-- Авторизация -->
+
                 <!-- Регистрация -->
-                {% extends "modules/registration.html" %}
+                {% include "modules/registration.html" %}
                 <!-- Регистрация -->
+
             </div>
         </div>
     </nav>
