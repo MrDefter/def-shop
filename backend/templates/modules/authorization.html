@@ -92,7 +92,7 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (data.message === "test") {
+            if (data.message === "Вход успешно выполнен!") {
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
                 notification.show();
             }
