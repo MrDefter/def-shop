@@ -16,12 +16,6 @@ class RegistrationModelResponse(BaseModel):
     message: str = Field(default_factory=str)
 
 
-class AuthorizationModelRequest(BaseModel):
-    """Модель запроса данных для авторизации."""
-    email: str = Field(default_factory=str)
-    password: str = Field(default_factory=str)
-
-
 class AuthorizationModelResponse(BaseModel):
     """Модель ответа данных для авторизации."""
     message: str = Field(default_factory=str)

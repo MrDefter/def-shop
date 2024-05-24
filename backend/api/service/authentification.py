@@ -19,8 +19,7 @@ class AuthentificationService:
         Args:
             data: Некоторые данные о пользователе.
         """
-        data_encode = data.copy()
-        encoded_jwt = encode(data_encode, get_cookies_settings().SECRET_KEY, get_cookies_settings().ALGHORITM)
+        encoded_jwt = encode(data, get_cookies_settings().SECRET_KEY, get_cookies_settings().ALGORITHM)
         return encoded_jwt
 
     def registration_user(
@@ -63,5 +62,10 @@ class AuthentificationService:
             )
 
         access_token = self.__create_access_token_login(data={'sub': username})
-        response.set_cookie(key='set_cookie', value=access_token, httponly=True)
+        response.set_cookie(
+            key=get_cookies_settings().ACCESS_TOKEN,
+            value=access_token,
+            httponly=True,
+            max_age=10,
+        )
         return AuthorizationModelResponse(message='Вход успешно выполнен!')

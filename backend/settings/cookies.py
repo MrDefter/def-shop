@@ -12,9 +12,13 @@ class CookiesSettings(BaseSettings):
         description='Ключ для настройки cookis.',
         examples=['12345qwerty'],
     )
-    ALGHORITM: str = Field(
+    ALGORITHM: str = Field(
         description='Алгоритм шифрования.',
         examples=['HS256'],
+    )
+    ACCESS_TOKEN: str = Field(
+        description='Секретный токен.',
+        examples=['12345qwerty'],
     )
 
     class Config:

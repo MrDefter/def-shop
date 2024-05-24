@@ -6,7 +6,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from backend.api.models import (
     RegistrationModelRequest,
     RegistrationModelResponse,
-    AuthorizationModelRequest,
     AuthorizationModelResponse,
 )
 from backend.api.service import AuthentificationService
@@ -37,7 +36,7 @@ def post_general_authorization(
     response: Response,
     authorization_data: OAuth2PasswordRequestForm = Depends(),
     service: AuthentificationService = Depends(),
-):
+) -> AuthorizationModelResponse:
     """Провести авторизацию пользователя."""
     return service.authorization_user(
         response=response,

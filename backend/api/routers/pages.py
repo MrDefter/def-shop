@@ -4,7 +4,6 @@ from fastapi import APIRouter, Request, Depends
 
 from backend.api.service import PagesService
 from fastapi.responses import HTMLResponse
-from backend.api.models import AuthorizationModelRequest
 
 router_pages = APIRouter(
     tags=['Генерация шаблонов HTML страниц.'],
