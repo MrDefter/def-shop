@@ -15,24 +15,18 @@ class PagesService:
 
     def get(
         self,
-        template: str,
         directory: str,
         request: Request,
     ) -> HTMLResponse:
         """Возвращает html шаблон для отображения на странице пользователю."""
-        templates = Jinja2Templates(directory=directory)
-        template = templates.TemplateResponse(template, {'request': request})
-        return template
-
-    def get_current_user(self, request: Request):
-        """Тест"""
         token = request.cookies.get(get_cookies_settings().ACCESS_TOKEN)
 
         if not token:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail='Вы не авторизированы!',
-            )
-        payload = decode(token, get_cookies_settings().SECRET_KEY, algorithms=[get_cookies_settings().ALGORITHM])
+            templates = Jinja2Templates(directory=directory)
+            template = templates.TemplateResponse('general_unauthorization.html', {'request': request})
+            return template
 
-        print(payload)
+        payload = decode(token, get_cookies_settings().SECRET_KEY, algorithms=[get_cookies_settings().ALGORITHM])
+        templates = Jinja2Templates(directory=directory)
+        template = templates.TemplateResponse('general_authorization.html', {'request': request})
+        return template

@@ -19,21 +19,11 @@ def get_page_general(
 
     Args:
         request: Запрос пользователя к серверу.
-        service: HTML шаблон.
+        service: Сервис для работы.
     Returns:
         Сгенерированный шаблон HTML.
     """
     return service.get(
-        template='general.html',
-        directory='backend/templates',
+        directory='templates',
         request=request,
     )
-
-
-@router_pages.get('/protected_route')
-def protected_route(
-    request: Request,
-    service: PagesService = Depends(),
-):
-    service.get_current_user(request=request)
-    return '123'
