@@ -120,6 +120,8 @@
         .then(response => response.json())
         .then(data => {
             if (data.message === "Пользователь успешно зарегистрирован!") {
+                location.reload();
+
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
                 notification.show();
             }
