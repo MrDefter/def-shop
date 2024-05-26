@@ -1,6 +1,7 @@
 """Сервис для работы с админской панелью."""
 
 from backend.api.models import AddProductModelResponse
+from backend.storage import insert_product
 
 
 class AdminService:
@@ -15,8 +16,8 @@ class AdminService:
             description: Описание товара.
             price: Цена товара.
         """
+        insert_product(data={"name": name, "description": description, "price": price})
 
-        print(name, description, price)
         return AddProductModelResponse(
-            message='Тест',
+            message='Товар успешно добавлен!',
         )

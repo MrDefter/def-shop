@@ -4,7 +4,7 @@ from fastapi import HTTPException, status, Response
 from jwt import encode
 
 from backend.api.models import RegistrationModelResponse, AuthorizationModelResponse
-from backend.storage import insert_data, check_user
+from backend.storage import insert_user, check_user
 from backend.settings import get_cookies_settings
 
 
@@ -45,7 +45,7 @@ class AuthentificationService:
                 detail='Пароли не совпадают!',
             )
 
-        insert_data(data={'username': username, 'email': email, 'password': password})
+        insert_user(data={'username': username, 'email': email, 'password': password})
         return RegistrationModelResponse(message='Пользователь успешно зарегистрирован!')
 
     def authorization_user(

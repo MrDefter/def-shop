@@ -1,5 +1,6 @@
 """Схемы базы данных."""
 
-from .authentification import ShopUsersScheme
+from .shop_product import ShopProductScheme
+from .shop_users import ShopUsersScheme
 
-__all__ = ['ShopUsersScheme']
+__all__ = ['ShopProductScheme', 'ShopUsersScheme']

@@ -1,10 +1,9 @@
 """Схема таблицы для регистрации пользователей."""
 
 from sqlalchemy import Column, String, Integer, Boolean
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import sql
 
-Base = declarative_base()
+from backend.storage.schemes.config import Base
 
 
 class ShopUsersScheme(Base):
