@@ -22,13 +22,21 @@
             <a class="navbar-brand" href="#">Магазин</a>
                 {% include "modules/search.html" %}
             <div class="ms-auto">
+
                 {% if not authorization %}
-                    {% include "modules/authorization.html" %}
-                    {% include "modules/registration.html" %}
+
+                    {% include "authentification/authorization.html" %}
+                    {% include "authentification/registration.html" %}
+
                 {% else %}
+
                     {% include "modules/basket.html" %}
+                    {% if is_admin %}
+                        {% include "modules/admin.html" %}
+                    {% endif %}
+
                 {% endif %}
-                {% include "modules/admin.html" %}
+
             </div>
         </div>
     </nav>

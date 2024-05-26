@@ -24,12 +24,12 @@
             <div class="modal-body">
                 <form id="authorizationForm">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Имя пользователя</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <label for="usernameAuthorization" class="form-label">Имя пользователя</label>
+                        <input type="text" class="form-control" id="usernameAuthorization" name="usernameAuthorization">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Пароль</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <label for="passwordAuthorizarion" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="passwordAuthorizarion" name="passwordAuthorizarion">
                     </div>
                     <button type="submit" class="btn btn-primary">Вход</button>
                 </form>
@@ -75,8 +75,8 @@
     document.getElementById("authorizationForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        const username = document.getElementById("usernameAuthorization").value;
+        const password = document.getElementById("passwordAuthorizarion").value;
 
         const formData = new URLSearchParams();
         formData.append("username", username);
