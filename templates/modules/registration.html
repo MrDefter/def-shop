@@ -110,6 +110,7 @@
             "duplicate_password": duplicatePassword,
         };
 
+
         fetch("http://127.0.0.1:8000/authentification/registration", {
             method: "POST",
             headers: {
@@ -120,8 +121,6 @@
         .then(response => response.json())
         .then(data => {
             if (data.message === "Пользователь успешно зарегистрирован!") {
-                location.reload();
-
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
                 notification.show();
             }
