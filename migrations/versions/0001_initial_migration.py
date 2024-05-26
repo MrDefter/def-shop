@@ -8,8 +8,8 @@ Create Date: 2024-04-30 16:41:08.416351
 from typing import Sequence, Union
 
 from alembic.op import create_table, drop_table
-from sqlalchemy import Column, Integer, String
-
+from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import sql
 
 # revision identifiers, used by Alembic.
 revision: str = '7216cc08a545'
@@ -25,6 +25,7 @@ def upgrade() -> None:
         Column('username', String(50), unique=True, nullable=False),
         Column('email', String(50), unique=True, nullable=False),
         Column('password', String(50), unique=False, nullable=False),
+        Column('isAdmin', Boolean, unique=False, nullable=False, server_default=sql.expression.false()),
     )
 
 
