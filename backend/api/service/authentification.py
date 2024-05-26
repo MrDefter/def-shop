@@ -66,6 +66,6 @@ class AuthentificationService:
             key=get_cookies_settings().ACCESS_TOKEN,
             value=access_token,
             httponly=True,
-            max_age=10,
+            max_age=3600,
         )
         return AuthorizationModelResponse(message='Вход успешно выполнен!')

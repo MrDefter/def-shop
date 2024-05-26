@@ -5,65 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .product-card {
-            margin-bottom: 1.5rem;
+        .widget-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
         }
-        .cart {
-            margin-top: 2rem;
+        .widget-button {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Магазин</a>
-                {% include "modules/search.html" %}
+                {% include "buttons/search.html" %}
+            <button class="btn btn-primary me-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Категории</button>
             <div class="ms-auto">
-
-                {% if not authorization %}
-
-                    {% include "authentification/authorization.html" %}
-                    {% include "authentification/registration.html" %}
-
-                {% else %}
-
-                    {% include "modules/basket.html" %}
-                    {% if is_admin %}
-                        {% include "admin/add_product.html" %}
-                    {% endif %}
-
+                {% if authorization %}
+                    {% include "buttons/basket.html" %}
                 {% endif %}
 
+                {% if not authorization %}
+                    {% include "buttons/authorization.html" %}
+                    {% include "buttons/registration.html" %}
+                {% endif %}
+
+                {% if is_admin %}
+                    {% include "buttons/add_product.html" %}
+                {% endif %}
             </div>
         </div>
     </nav>
 
+    {% include "shop/cards.html"%}
 
 
 
 
+    <!-- Ваш контент -->
 
-
-    <div class="container mt-4">
-        <div class="row">
-            {% for product in products %}
-                <div class="col-md-4">
-                    <div class="card product-card">
-                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text"><strong>{{ product.price }} ₽</strong></p>
-                            <a href="#" class="btn btn-primary">Добавить в корзину</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+    <!-- Виджет -->
+    <div class="widget-container">
+        <button class="btn btn-primary widget-button">Кнопка 1</button>
+        <button class="btn btn-secondary widget-button">Кнопка 2</button>
+        <button class="btn btn-success widget-button">Кнопка 3</button>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -122,6 +119,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

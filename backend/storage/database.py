@@ -44,6 +44,19 @@ def insert_product(data: dict) -> None:
             )
 
 
+def get_product() -> list:
+    """Получить все товары.
+
+    Retuns:
+        Список товаров.
+    """
+    query = select(ShopProductScheme.name, ShopProductScheme.description, ShopProductScheme.price)
+
+    with make_cursor() as cursor:
+        products = cursor.execute(query).all()
+        return products
+
+
 def check_user(data: dict) -> bool:
     """Имеется ли такой пользователь.
 
