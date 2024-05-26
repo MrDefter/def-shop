@@ -27,8 +27,8 @@ def insert_data(data: dict) -> None:
             )
 
 
-def search_user(data: dict) -> bool:
-    """Найти пользователя.
+def check_user(data: dict) -> bool:
+    """Имеется ли такой пользователь.
 
     Returns:
         True, если пользователь найден. Иначе False.
@@ -41,3 +41,17 @@ def search_user(data: dict) -> bool:
     with make_cursor() as cursor:
         user = cursor.execute(query).all()
         return not len(user)
+
+
+def check_admin(data: dict) -> bool:
+    """Является ли пользователь администратором.
+
+    Returns:
+        True, если пользователь является администратором. Иначе False.
+    """
+    query = select(ShopUsersScheme.isAdmin).where(
+        ShopUsersScheme.username == data['sub'],
+    )
+
+    with make_cursor() as cursor:
+        return cursor.execute(query).all()[0][0]

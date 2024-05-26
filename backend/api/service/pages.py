@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 from jwt import decode
 
 from backend.settings import get_cookies_settings
+from backend.storage import check_admin
 
 
 class PagesService:
@@ -27,8 +28,10 @@ class PagesService:
             return template
 
         payload = decode(token, get_cookies_settings().SECRET_KEY, algorithms=[get_cookies_settings().ALGORITHM])
+        is_admin = check_admin(payload)
+
         template = templates.TemplateResponse(
             'general.html',
-            {'request': request, 'authorization': True, 'user': payload},
+            {'request': request, 'authorization': True, 'is_admin': is_admin},
         )
         return template

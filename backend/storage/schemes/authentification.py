@@ -1,8 +1,8 @@
 """Схема таблицы для регистрации пользователей."""
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-
+from sqlalchemy import sql
 
 Base = declarative_base()
 
@@ -15,3 +15,4 @@ class ShopUsersScheme(Base):
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(50), unique=True, nullable=False)
     password = Column(String(50), unique=False, nullable=False)
+    isAdmin = Column(Boolean, unique=False, nullable=False, server_default=sql.expression.false())
