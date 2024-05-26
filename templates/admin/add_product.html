@@ -35,10 +35,6 @@
                         <label for="productPrice" class="form-label">Цена товара</label>
                         <input type="number" class="form-control" id="productPrice" name="productPrice" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="productImage" class="form-label">Изображение товара (URL)</label>
-                        <input type="url" class="form-control" id="productImage" name="productImage" required>
-                    </div>
                     <button type="submit" class="btn btn-primary">Добавить товар</button>
                 </form>
             </div>
@@ -54,18 +50,13 @@
         const productName = document.getElementById("productName").value;
         const productDescription = document.getElementById("productDescription").value;
         const productPrice = document.getElementById("productPrice").value;
-        const productImage = document.getElementById("productImage").value;
 
         const productData = {
             name: productName,
             description: productDescription,
             price: productPrice,
-
         };
 
-        console.log("Product Data:", productData);
-
-        // Имитация отправки данных на сервер (замените на реальный URL и метод)
         fetch("http://127.0.0.1:8000/admin/add_product", {
             method: "POST",
             headers: {
@@ -76,9 +67,6 @@
         .then(response => response.json())
         .then(data => {
             console.log("Success:", data);
-            // Закрыть модальное окно после успешного добавления
-            const modal = bootstrap.Modal.getInstance(document.getElementById('adminPanelModal'));
-            modal.hide();
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -86,5 +74,4 @@
     });
 </script>
 
-</body>
 </html>

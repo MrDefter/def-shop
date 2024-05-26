@@ -16,6 +16,7 @@ class AdminService:
             price: Цена товара.
         """
 
+        print(name, description, price)
         return AddProductModelResponse(
             message='Тест',
         )
