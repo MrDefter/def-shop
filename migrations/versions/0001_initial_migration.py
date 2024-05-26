@@ -27,7 +27,15 @@ def upgrade() -> None:
         Column('password', String(50), unique=False, nullable=False),
         Column('isAdmin', Boolean, unique=False, nullable=False, server_default=sql.expression.false()),
     )
+    create_table(
+        'shopProduct',
+        Column('id', Integer, primary_key=True),
+        Column('name', String(50), unique=True, nullable=False),
+        Column('description', String, unique=False, nullable=False),
+        Column('price', Integer, unique=False, nullable=False),
+    )
 
 
 def downgrade() -> None:
     drop_table('shopUsers')
+    drop_table('shopProduct')
