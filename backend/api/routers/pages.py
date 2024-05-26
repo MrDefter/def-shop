@@ -12,7 +12,6 @@ router_pages = APIRouter(
 
 @router_pages.get(
     '/general',
-    response_model=HTMLResponse,
     summary='Вернуть главную HTML страницу.',
 )
 def get_page_general(

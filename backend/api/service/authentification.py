@@ -4,7 +4,7 @@ from fastapi import HTTPException, status, Response
 from jwt import encode
 
 from backend.api.models import RegistrationModelResponse, AuthorizationModelResponse
-from backend.storage import insert_data, search_user
+from backend.storage import insert_data, check_user
 from backend.settings import get_cookies_settings
 
 
@@ -55,7 +55,7 @@ class AuthentificationService:
         password: str,
     ) -> AuthorizationModelResponse:
         """Авторизация пользователя."""
-        if search_user(data={'username': username, 'password': password}):
+        if check_user(data={'username': username, 'password': password}):
             raise HTTPException(
                 status.HTTP_400_BAD_REQUEST,
                 detail='Пользователь не найден! Проверьте правильность указанных данных.'
