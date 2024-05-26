@@ -26,7 +26,12 @@ def post_general_registration(
     registration_data: RegistrationModelRequest,
     service: AuthentificationService = Depends(),
 ) -> RegistrationModelResponse:
-    """Провести регистрация пользователя."""
+    """Провести регистрация пользователя.
+
+    Args:
+        registration_data: Данные о пользователе.
+        service: Сервис обработки.
+    """
     return service.registration_user(
         username=registration_data.username,
         email=registration_data.email,
