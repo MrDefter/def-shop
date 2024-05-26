@@ -10,7 +10,11 @@ router_pages = APIRouter(
 )
 
 
-@router_pages.get('/general')
+@router_pages.get(
+    '/general',
+    response_model=HTMLResponse,
+    summary='Вернуть главную HTML страницу.',
+)
 def get_page_general(
         request: Request,
         service: PagesService = Depends(),

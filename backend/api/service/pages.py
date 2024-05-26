@@ -20,13 +20,15 @@ class PagesService:
     ) -> HTMLResponse:
         """Возвращает html шаблон для отображения на странице пользователю."""
         token = request.cookies.get(get_cookies_settings().ACCESS_TOKEN)
+        templates = Jinja2Templates(directory=directory)
 
         if not token:
-            templates = Jinja2Templates(directory=directory)
-            template = templates.TemplateResponse('general_unauthorization.html', {'request': request})
+            template = templates.TemplateResponse('general.html', {'request': request, 'authorization': False})
             return template
 
         payload = decode(token, get_cookies_settings().SECRET_KEY, algorithms=[get_cookies_settings().ALGORITHM])
-        templates = Jinja2Templates(directory=directory)
-        template = templates.TemplateResponse('general_authorization.html', {'request': request})
+        template = templates.TemplateResponse(
+            'general.html',
+            {'request': request, 'authorization': True, 'user': payload},
+        )
         return template

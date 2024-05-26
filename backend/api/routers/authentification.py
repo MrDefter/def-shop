@@ -17,7 +17,11 @@ router_authentification = APIRouter(
 )
 
 
-@router_authentification.post('/registration')
+@router_authentification.post(
+    '/registration',
+    response_model=RegistrationModelResponse,
+    summary='Провести регистрация пользователя.',
+)
 def post_general_registration(
     registration_data: RegistrationModelRequest,
     service: AuthentificationService = Depends(),
@@ -31,7 +35,11 @@ def post_general_registration(
     )
 
 
-@router_authentification.post('/authorization')
+@router_authentification.post(
+    '/authorization',
+    response_model=AuthorizationModelResponse,
+    summary='Провести авторизация пользователя.'
+)
 def post_general_authorization(
     response: Response,
     authorization_data: OAuth2PasswordRequestForm = Depends(),
