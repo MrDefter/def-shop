@@ -7,6 +7,7 @@ from backend.api.models import (
     RegistrationModelRequest,
     RegistrationModelResponse,
     AuthorizationModelResponse,
+    ExitModelResponse,
 )
 from backend.api.service import AuthentificationService
 
@@ -55,4 +56,17 @@ def post_general_authorization(
         response=response,
         username=authorization_data.username,
         password=authorization_data.password,
+    )
+
+
+@router_authentification.post(
+    '/exit',
+    response_model=ExitModelResponse
+)
+def post_general_exit(
+    user_data: Response,
+    service: AuthentificationService = Depends(),
+):
+    return service.exit_user(
+        user_data=user_data,
     )

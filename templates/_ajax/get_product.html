@@ -1,0 +1,28 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+            <h5 class="modal-title">Удалить товар</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="removeProductForm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Название</th>
+                            <th scope="col">Удаление</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td><button type="button" class="btn btn-primary remove-button" id="removeButton" data-product-id="{{ product.id }}">Удалить</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

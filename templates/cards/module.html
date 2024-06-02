@@ -1,0 +1,22 @@
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-4 col-sm-6">
+        <div class="product-card">
+            <div class="product-details">
+                <div class="h4">{{ product.name }}</div>
+                <div class="p">{{ product.description }}</div>
+                <div class="product-bottom-details d-flex justify-content-between">
+                    <div class="product-price">
+                        {{ product.price }} ₽
+                    </div>
+                    <div class="product-links">
+                        <a href="">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

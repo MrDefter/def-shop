@@ -1,0 +1,99 @@
+<!-- Отправка данных на сервер для модуля регистрации. -->
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("usernameRegistration").value;
+        const email = document.getElementById("emailRegistration").value;
+        const password = document.getElementById("passwordRegistration").value;
+        const duplicatePassword = document.getElementById("duplicatePasswordRegistration").value;
+
+        const formData = {
+            "username": username,
+            "email": email,
+            "password": password,
+            "duplicate_password": duplicatePassword,
+        };
+
+        fetch("http://127.0.0.1:8000/authentification/registration", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Пользователь успешно зарегистрирован!") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfullyRegistration'));
+                notification.show();
+            }
+            if (data.detail === "Пароли не совпадают!") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentFailedPassword'));
+                notification.show();
+            }
+            if (data.detail === "Такой пользователь уже существует!") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentDuplicateUser'));
+                notification.show();
+            }
+        })
+    });
+</script>
+<!-- Отправка данных на сервер для модуля регистрации. -->
+
+<!-- Отправка данных на сервер для модуля авторизации. -->
+<script>
+    document.getElementById("authorizationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("usernameAuthorization").value;
+        const password = document.getElementById("passwordAuthorizarion").value;
+
+        const formData = new URLSearchParams();
+        formData.append("username", username);
+        formData.append("password", password);
+
+        fetch("http://127.0.0.1:8000/authentification/authorization", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Вход успешно выполнен!") {
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
+                notification.show();
+            }
+            if (data.detail === "Пользователь не найден! Проверьте правильность указанных данных.") {
+                const notification = new bootstrap.Toast(document.getElementById('notificationContentFailedUser'));
+                notification.show();
+            }
+        })
+    });
+</script>
+<!-- Отправка данных на сервер для модуля авторизации. -->
+
+<!-- Отправка данных на сервер для модуля выхода. -->
+<script>
+       document.getElementById('exit').addEventListener('click', function(event) {
+            event.preventDefault(); // Предотвращаем стандартное действие ссылки
+
+            fetch('http://127.0.0.1:8000/authentification/exit', {
+                method: 'POST',
+                credentials: 'same-origin' // Включает куки в запросе
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Выход успешно выполнен.") {
+                    location.reload()
+                }
+            })
+        });
+</script>
+
+<!-- Отправка данных на сервер для модуля выхода. -->

@@ -11,4 +11,15 @@ class AddProductModelRequest(BaseModel):
 
 
 class AddProductModelResponse(BaseModel):
+    """Модель ответа добавления товара в магазин."""
+    message: str = Field(default_factory=str)
+
+
+class RemoveProductModelRequest(BaseModel):
+    """Модель запроса удаления товара из магазина."""
+    product_id: int = Field(default_factory=int)
+
+
+class RemoveProductModelResponse(BaseModel):
+    """Модель ответа удаления товара из магазина."""
     message: str = Field(default_factory=str)

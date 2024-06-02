@@ -1,9 +1,10 @@
 """Главная страница."""
 
 from fastapi import APIRouter, Request, Depends
+from fastapi.responses import HTMLResponse
 
 from backend.api.service import PagesService
-from fastapi.responses import HTMLResponse
+
 
 router_pages = APIRouter(
     tags=['Генерация шаблонов HTML страниц.'],

@@ -1,0 +1,77 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-sharp fa-solid fa-user fa-lg"></i>
+    </a>
+    <ul class="dropdown-menu">
+        {% if not authorization %}
+        <li><a class="dropdown-item" role="button" data-bs-toggle="modal" data-bs-target="#registration" href="#">Регистрация</a></li>
+        <li><a class="dropdown-item" role="button" data-bs-toggle="modal" data-bs-target="#authorization" href="#">Авторизация</a></li>
+        {% endif %}
+
+        {% if authorization %}
+        <li><a class="dropdown-item" id="exit" role="button" href="#">Выход</a></li>
+        {% endif %}
+    </ul>
+</li>
+
+<!-- Модальное окно регистрации. -->
+<div class="modal fade" id="registration" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Регистрация</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm">
+                    <div class="mb-3">
+                        <label for="usernameRegistration" class="form-label">Имя пользователя</label>
+                        <input type="text" class="form-control" id="usernameRegistration" name="usernameRegistration">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailRegistration" class="form-label">Email адрес</label>
+                        <input type="text" class="form-control" id="emailRegistration" name="emailRegistration" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">Мы никогда не передадим вашу электронную почту кому-либо еще.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordRegistration" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="passwordRegistration" name="passwordRegistration">
+                    </div>
+                    <div class="mb-3">
+                        <label for="duplicatePasswordRegistration" class="form-label">Повторите пароль</label>
+                        <input type="password" class="form-control" id="duplicatePasswordRegistration" name="duplicatePasswordRegistration">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно авторизации. -->
+<div class="modal fade" id="authorization" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Авторизация</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="authorizationForm">
+                    <div class="mb-3">
+                        <label for="usernameAuthorization" class="form-label">Имя пользователя</label>
+                        <input type="text" class="form-control" id="usernameAuthorization" name="usernameAuthorization">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordAuthorizarion" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="passwordAuthorizarion" name="passwordAuthorizarion">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Вход</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'authentification/notifications.html' %}
+{% include 'authentification/scripts.html' %}

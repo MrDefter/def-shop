@@ -1,0 +1,33 @@
+<!-- Модальное окно для добавления товара. -->
+<div class="modal fade" id="addProduct" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Добавить товар</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Название товара</label>
+                        <input type="text" class="form-control" id="productName" name="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Описание товара</label>
+                        <input type="text" class="form-control" id="productDescription" name="productDescription">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Цена</label>
+                        <input type="text" class="form-control" id="productPrice" name="productPrice">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно для добавления товара. -->
+
+{% include 'add_product/notifications.html'%}
+{% include 'add_product/scripts.html'%}
+

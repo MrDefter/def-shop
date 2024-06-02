@@ -1,7 +1,7 @@
 """Работы с postgres"""
 
 from fastapi import HTTPException, status
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, delete
 from sqlalchemy.exc import IntegrityError
 
 from backend.storage.utils.connect import make_cursor
@@ -44,13 +44,30 @@ def insert_product(data: dict) -> None:
             )
 
 
-def get_product() -> list:
+def remove_product(product_id: int) -> None:
+    """Удалить товар из базы данных.
+
+    Args:
+        product_id: Идентификационный номер, по которому произвести удаление.
+    """
+    query = delete(ShopProductScheme).where(ShopProductScheme.id == product_id)
+
+    with make_cursor() as cursor:
+        cursor.execute(query)
+
+
+def get_products() -> list:
     """Получить все товары.
 
     Retuns:
         Список товаров.
     """
-    query = select(ShopProductScheme.name, ShopProductScheme.description, ShopProductScheme.price)
+    query = select(
+        ShopProductScheme.id,
+        ShopProductScheme.name,
+        ShopProductScheme.description,
+        ShopProductScheme.price,
+    )
 
     with make_cursor() as cursor:
         products = cursor.execute(query).all()

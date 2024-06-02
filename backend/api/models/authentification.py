@@ -19,3 +19,7 @@ class RegistrationModelResponse(BaseModel):
 class AuthorizationModelResponse(BaseModel):
     """Модель ответа данных для авторизации."""
     message: str = Field(default_factory=str)
+
+
+class ExitModelResponse(BaseModel):
+    message: str = Field(default_factory=str)

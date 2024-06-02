@@ -1,0 +1,77 @@
+<!-- Модальное окно для удаления товара. -->
+<div class="modal fade" id="removeProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Удалить товар</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="removeProductForm">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Название</th>
+                                <th scope="col">Удаление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td><button type="button" class="btn btn-primary remove-button" id="removeButton" data-product-id="{{ product.id }}">Удалить</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно для удаления товара. -->
+
+<!-- Скрипт удаления товаров. -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.remove-button').on('click', function () {
+            const productId = $(this).data('product-id');
+
+            const formData = {
+                "product_id": productId,
+            };
+
+            $.ajax({
+                url: 'http://127.0.0.1:8000/admin/remove_product',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function () {
+                    // Обновление содержимого модального окна
+                    loadProducts();
+                },
+            });
+
+        });
+
+        function loadProducts() {
+            // Использование AJAX для подгрузки нового контента в модальное окно
+            $.ajax({
+                url: 'http://127.0.0.1:8000/admin/get_product', // URL для получения нового контента
+                method: 'GET',
+                success: function (response) {
+                    // Обновление содержимого модального окна
+                    document.getElementById('removeProductModal').innerHTML = response;
+                },
+            });
+        }
+    });
+</script>
+<!-- Скрипт удаления товаров. -->
+
+<!-- Скрипт подгрузки товаров. -->
+<script>
+
+</script>
+<!-- Скрипт подгрузки товаров. -->

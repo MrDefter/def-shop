@@ -1,0 +1,31 @@
+<!-- Скрипт добавления товара. -->
+<script>
+    document.getElementById("addProductForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const productName = document.getElementById("productName").value;
+        const productDescription = document.getElementById("productDescription").value;
+        const productPrice = document.getElementById("productPrice").value;
+
+        const productData = {
+            name: productName,
+            description: productDescription,
+            price: productPrice,
+        };
+
+        fetch("http://127.0.0.1:8000/admin/add_product", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(productData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Товар успешно добавлен!") {
+                location.reload()
+            }
+        })
+    });
+</script>
+<!-- Скрипт добавления товара. -->
