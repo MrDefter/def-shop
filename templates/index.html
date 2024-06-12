@@ -22,16 +22,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
+                
+                {% if authorization %}
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#personalCabinet" href="#">Купленные товары</a>
+                    {% include 'personal_cabinet/module.html' %}
+                </li>
+                {% endif %}
+
                 {% if is_admin %}
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="modal" data-bs-target="#addProduct" href="#">Добавить товар</a>
                     {% include 'add_product/module.html' %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#removeProductModal" href="#">Удалить товар</a>
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#removeProduct" href="#">Удалить товар</a>
                     {% include 'remove_product/module.html' %}
                 </li>
                 {% endif %}
+
             </ul>
 
 

@@ -63,11 +63,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.message === "Вход успешно выполнен!") {
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-                const notification = new bootstrap.Toast(document.getElementById('notificationContentSuccessfully'));
-                notification.show();
+                location.reload();
             }
             if (data.detail === "Пользователь не найден! Проверьте правильность указанных данных.") {
                 const notification = new bootstrap.Toast(document.getElementById('notificationContentFailedUser'));

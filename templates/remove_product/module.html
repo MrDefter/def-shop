@@ -1,5 +1,5 @@
 <!-- Модальное окно для удаления товара. -->
-<div class="modal fade" id="removeProductModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="removeProduct" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info text-white">
@@ -70,8 +70,12 @@
 </script>
 <!-- Скрипт удаления товаров. -->
 
-<!-- Скрипт подгрузки товаров. -->
+<!-- Скрипт обновления страницы при закрытии окна. -->
 <script>
-
+    $(document).ready(function(){
+        $('#removeProductModal').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+    });
 </script>
-<!-- Скрипт подгрузки товаров. -->
+<!-- Скрипт обновления страницы при закрытии окна. -->
