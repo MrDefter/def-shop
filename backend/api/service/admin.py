@@ -21,13 +21,17 @@ class AdminService:
         products = get_products()
         return products
 
-    def add_product(self, name: str, description: str, price: int) -> AddProductModelResponse:
+    def __save_winrar(self, file) -> list:
+        pass
+    
+    def add_product(self, name: str, description: str, price: int, file) -> AddProductModelResponse:
         """Добавить товар в магазин.
 
         Args:
             name: Название товара.
             description: Описание товара.
             price: Цена товара.
+            file: Файл.
         """
         insert_product(data={"name": name, "description": description, "price": price})
 

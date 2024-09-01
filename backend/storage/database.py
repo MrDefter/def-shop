@@ -102,3 +102,11 @@ def check_admin(data: dict) -> bool:
 
     with make_cursor() as cursor:
         return cursor.execute(query).all()[0][0]
+
+
+def create_cards_user(user: str) -> None:
+    """Создать корзину пользователя.
+
+    Args:
+        user: Имя пользователя.
+    """

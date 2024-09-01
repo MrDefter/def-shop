@@ -1,6 +1,6 @@
 """Админский модуль."""
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, Form, UploadFile, File
 from fastapi.responses import HTMLResponse
 
 from backend.api.service import AdminService
@@ -24,19 +24,26 @@ router_admin = APIRouter(
     summary='Добавить товар в магазин.',
 )
 def post_add_product(
-    product_data: AddProductModelRequest,
+    name: str = Form(...),
+    description: str = Form(...),
+    price: int = Form(...),
+    file: UploadFile = File(...),
     service: AdminService = Depends(),
 ) -> AddProductModelResponse:
     """Добавить товар на сайт.
 
     Args:
-        product_data: Данные о товаре.
+        name: Название товара.
+        description: Описание товара.
+        price: Цена товара.
+        file: Файл.
         service: Сервис обработки.
     """
     return service.add_product(
-        name=product_data.name,
-        description=product_data.description,
-        price=product_data.price,
+        name=name,
+        description=description,
+        price=price,
+        file=file
     )
 
 
