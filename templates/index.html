@@ -25,7 +25,7 @@
                 
                 {% if authorization %}
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#personalCabinet" href="#">Купленные товары</a>
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#personalCabinet" href="#">Добавленные товары</a>
                     {% include 'personal_cabinet/module.html' %}
                 </li>
                 {% endif %}
@@ -48,14 +48,14 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% include 'authentification/module.html' %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="Cart" role="button" data-bs-toggle="modal" data-bs-target="#modal-cart" aria-expanded="false">
+                    <a class="nav-link" href="#" id="Cart" role="button" data-bs-toggle="modal" data-bs-target="#busketShop" aria-expanded="false">
                         <i class="fa-solid fa-cart-shopping fa-lg"></i>
                     </a>
-                    <div class="modal fade" id="modal-cart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modal-cart" tabindex="-1" aria-labelledby="busketShop" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header bg-info text-white">
-                                    <h5 class="modal-title" id="exampleModalLabel">Корзина</h5>
+                                    <h5 class="modal-title" id="busketShop">Корзина</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
