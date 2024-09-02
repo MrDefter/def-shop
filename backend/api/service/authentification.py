@@ -65,6 +65,10 @@ class AuthentificationService:
             httponly=True,
             max_age=3600,
         )
+        response.set_cookie(
+            key='username',
+            value=username,
+        )
         return AuthorizationModelResponse(message='Вход успешно выполнен!')
 
     def exit_user(self, user_data: Response) -> ExitModelResponse:

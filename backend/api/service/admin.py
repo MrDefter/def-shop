@@ -60,6 +60,5 @@ class AdminService:
         templates = Jinja2Templates(directory=directory)
 
         data = {'request': request, 'products': self.__get_products()}
-        print(data)
         template = templates.TemplateResponse('get_product.html', data)
         return template

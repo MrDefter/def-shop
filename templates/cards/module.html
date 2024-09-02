@@ -10,6 +10,11 @@
                         {{ product.price }} ₽
                     </div>
                     <div class="product-links">
+                        <a href="#" class="add-to-cart" data-id="{{ product.name }}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+                    <div class="product-links">
                         <a href="">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a>
@@ -20,3 +25,27 @@
     </div>
     {% endfor %}
 </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Обработчик кликов по кнопкам добавления в корзину
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Предотвращает переход по ссылке
+
+                const productId = this.getAttribute('data-id'); // Получение ID товара из атрибута data-id
+
+                // Отправка запроса на сервер
+                fetch('http://127.0.0.1:8000/add_busket_product', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: productId })
+                })
+                .then(response => response.json())
+            });
+        });
+    });
+</script>

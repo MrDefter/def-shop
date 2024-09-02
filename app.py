@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from backend.api.routers import router_admin, router_pages, router_authentification
+from backend.api.routers import router_admin, router_pages, router_authentification, router_shop
 
 
 def make_app() -> FastAPI:
@@ -16,5 +16,6 @@ def make_app() -> FastAPI:
     app.include_router(router_admin)
     app.include_router(router_authentification)
     app.include_router(router_pages)
+    app.include_router(router_shop)
 
     return app

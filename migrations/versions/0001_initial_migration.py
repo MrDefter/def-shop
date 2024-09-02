@@ -36,7 +36,7 @@ def upgrade() -> None:
         Column('price', Integer, unique=False, nullable=False),
     )
     create_table(
-        'usersCards',
+        'busketShop',
         Column('idUser', Integer(), nullable=True),
         ForeignKeyConstraint(['idUser'], ['shopUsers.id'], ),
         PrimaryKeyConstraint('idUser')
@@ -46,3 +46,4 @@ def upgrade() -> None:
 def downgrade() -> None:
     drop_table('shopUsers')
     drop_table('shopProduct')
+    drop_table('busketShop')

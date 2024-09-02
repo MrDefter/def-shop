@@ -110,3 +110,7 @@ def create_cards_user(user: str) -> None:
     Args:
         user: Имя пользователя.
     """
+
+
+def get_busket_user() -> None:
+    """"""
