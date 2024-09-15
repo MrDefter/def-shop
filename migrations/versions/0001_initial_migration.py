@@ -8,7 +8,7 @@ Create Date: 2024-04-30 16:41:08.416351
 from typing import Sequence, Union
 
 from alembic.op import create_table, drop_table
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKeyConstraint, PrimaryKeyConstraint
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKeyConstraint, PrimaryKeyConstraint, ForeignKey
 from sqlalchemy import sql
 
 # revision identifiers, used by Alembic.
@@ -20,15 +20,6 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     create_table(
-        'shopUsers',
-        Column('id', Integer, primary_key=True),
-        Column('username', String(50), unique=True, nullable=False),
-        Column('email', String(50), unique=True, nullable=False),
-        Column('password', String(50), unique=False, nullable=False),
-        Column('id', Integer, primary_key=True),
-        Column('isAdmin', Boolean, unique=False, nullable=False, server_default=sql.expression.false()),
-    )
-    create_table(
         'shopProduct',
         Column('id', Integer, primary_key=True),
         Column('name', String(50), unique=True, nullable=False),
@@ -36,14 +27,22 @@ def upgrade() -> None:
         Column('price', Integer, unique=False, nullable=False),
     )
     create_table(
-        'busketShop',
-        Column('idUser', Integer(), nullable=True),
-        ForeignKeyConstraint(['idUser'], ['shopUsers.id'], ),
-        PrimaryKeyConstraint('idUser')
+        'shopUsers',
+        Column('id', Integer, primary_key=True),
+        Column('username', String(50), unique=True, nullable=False),
+        Column('email', String(50), unique=True, nullable=False),
+        Column('password', String(50), unique=False, nullable=False),
+        Column('isAdmin', Boolean, unique=False, nullable=False, server_default=sql.expression.false()),
+    )
+    create_table(
+        'shopBusket',
+        Column('id', Integer, primary_key=True),
+        Column('username', String(), nullable=False),
+        Column('idProduct', String(), nullable=False),
     )
 
 
 def downgrade() -> None:
-    drop_table('shopUsers')
     drop_table('shopProduct')
-    drop_table('busketShop')
+    drop_table('shopUsers')
+    drop_table('shopBusket')

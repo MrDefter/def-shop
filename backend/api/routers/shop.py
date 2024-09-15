@@ -1,9 +1,10 @@
 """Работа с магазином"""
 
 from fastapi import APIRouter, Depends, Response, Request
+from pydantic import BaseModel
 
 from backend.api.service import ShopServices
-from fastapi.security import OAuth2PasswordRequestForm
+from backend.api.models import CardDataModelRequest
 
 
 router_shop = APIRouter(
@@ -17,14 +18,12 @@ router_shop = APIRouter(
     summary='Добавить товар в корзину'
 )
 def post_general_authorization(
+    card_data: CardDataModelRequest,
     user_data: Request,
-    card_data,
-    response: Response,
     service: ShopServices = Depends(),
 ):
     """Провести авторизацию пользователя."""
-    print(card_data)
     return service.add_busket_product(
+        card_data_id=card_data.id,
         username=user_data.cookies.get('username'),
     )
-

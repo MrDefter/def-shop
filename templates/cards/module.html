@@ -14,11 +14,6 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </div>
-                    <div class="product-links">
-                        <a href="">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +32,7 @@
                 const productId = this.getAttribute('data-id'); // Получение ID товара из атрибута data-id
 
                 // Отправка запроса на сервер
-                fetch('http://127.0.0.1:8000/add_busket_product', {
+                fetch('http://127.0.0.1:8000/shop/add_busket_product', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

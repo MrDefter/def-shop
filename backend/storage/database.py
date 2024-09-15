@@ -5,7 +5,7 @@ from sqlalchemy import insert, select, delete
 from sqlalchemy.exc import IntegrityError
 
 from backend.storage.utils.connect import make_cursor
-from backend.storage.schemes import ShopProductScheme, ShopUsersScheme
+from backend.storage.schemes import ShopProductScheme, ShopUsersScheme, ShopBusketScheme
 
 
 def insert_user(data: dict) -> None:
@@ -43,6 +43,13 @@ def insert_product(data: dict) -> None:
                 detail='Такое название товара уже существует!',
             )
 
+
+def add_busket_user(data: dict) -> None:
+    """Добавить товар для пользователя."""
+    query = insert(ShopBusketScheme)
+
+    with make_cursor() as cursor:
+        cursor.execute(query, data)
 
 def remove_product(product_id: int) -> None:
     """Удалить товар из базы данных.
@@ -104,13 +111,7 @@ def check_admin(data: dict) -> bool:
         return cursor.execute(query).all()[0][0]
 
 
-def create_cards_user(user: str) -> None:
-    """Создать корзину пользователя.
-
-    Args:
-        user: Имя пользователя.
-    """
-
-
 def get_busket_user() -> None:
     """"""
+
+

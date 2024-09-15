@@ -1,6 +1,7 @@
 """Схема базы данных для хранения товаров сайта."""
 
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from backend.storage.schemes.config import Base
 

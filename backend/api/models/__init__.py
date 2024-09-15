@@ -14,6 +14,10 @@ from .authentification import (
     ExitModelResponse,
 )
 
+from .shop import (
+    CardDataModelRequest,
+)
+
 __all__ = [
     'AddProductModelRequest',
     'AddProductModelResponse',
@@ -23,4 +27,5 @@ __all__ = [
     'RegistrationModelResponse',
     'AuthorizationModelResponse',
     'ExitModelResponse',
+    'CardDataModelRequest',
 ]
